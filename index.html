@@ -1,42 +1,37 @@
+<!DOCTYPE html>
 <html>
 
 <head>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.4/raphael-min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.2.2/justgage.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
   <script>
     var accessToken = "45eae5262548cb51cbc4a9137d6f99b720e9f806";
     var deviceID = "530036000c51353432383931"
     var url = "https://api.particle.io/v1/devices/" + deviceID + "/volts";
-    function callback(data, status) { //This function checks that communcation is happening
+    function callback(data, status) {    //This function checks that communcation is happening
       if (status == "success") {
         volts = parseFloat(data.result);
-        volts = volts.toFixed(2); //determines how many decimal places show
-        g.refresh(volts);
-        setTimeout(getReading, 1000); //this calls the getReading function every second
+        volts = volts.toFixed(2);        //determines how many decimal places show
+        setTimeout(getReading, 1000);    //this calls the getReading function every second
+        document.getElementById("reading").innerHTML = volts;
       } else {
         alert("There was a problem");
       }
     }
-    function getReading() {
-      $.get(url, {access_token: accessToken}, callback);
+    function getReading() {     //this function does the actual reading
+       $.get(url, {access_token: accessToken}, callback);
     }
   </script>
 </head>
 
-<body>
-  <div id="gauge" class="200x160px"></div>
+<body bgcolor = gray>
 
+  <h1>Photon Light Sensor Data</h1>
+
+  <h1 id="reading"></h1>
   <script>
-    var g = new JustGage({   //set up the gauge
-      id: "gauge",
-      value: 0,
-      min: 0,
-      max: 3.3,
-      title: "Volts"
-    });
     getReading();
   </script>
 </body>
+
 </html>
