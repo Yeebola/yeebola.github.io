@@ -53,22 +53,24 @@
              $.post("https://api.particle.io/v1/devices/"+ deviceID +"/led?access_token="+ accessToken , {
                  value: "off"
              });
-         }}
+         }
+       }
   </script>
 </head>
 
 <body bgcolor = gray>
 
-  <h1>Photon Light Sensor Data</h1>
+  <h1>How Loud Your Class is Being</h1>
 
   <h1 id="reading"></h1>
   <script>
     getReading();
   </script>
-  <button type="ledOn" onclick="ledOn()">On</button>
-   <button type="ledOff" onclick="ledOff()">Off</button>
-   <button type="toggleLed" onclick="toggleLed()">toggle</button>
 
+
+  <button type="ledOn" onclick="ledOn()">Shut them Up</button>
+   <button type="ledOff" onclick="ledOff()">Reset</button>
+   
 </body>
 
 </html>
